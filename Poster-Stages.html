@@ -388,28 +388,28 @@ nav.shift ul li a:hover:after {
         </div>
     </footer>
 	<script type="text/javascript"> Cufon.now(); </script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
-<script type="text/javascript">
-    $(function($){
-        var addToAll = false;
-        var gallery = true;
-        var titlePosition = 'inside';
-        $(addToAll ? 'img' : 'img.fancybox').each(function(){
-            var $this = $(this);
-            var title = $this.attr('title');
-            var src = $this.attr('data-big') || $this.attr('src');
-            var a = $('<a href="#" class="fancybox"></a>').attr('href', src).attr('title', title);
-            $this.wrap(a);
-        });
-        if (gallery)
-            $('a.fancybox').attr('rel', 'fancyboxgallery');
-        $('a.fancybox').fancybox({
-            titlePosition: titlePosition
-        });
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
+<script>
+$(function () {
+    $('img.fancybox').each(function () {
+        var $img = $(this);
+
+        if ($img.parent('a.fancybox').length) return;
+
+        var src = $img.attr('data-big') || $img.attr('src');
+        if (!src) return;
+
+        $img.wrap(
+            $('<a class="fancybox" rel="fancyboxgallery"></a>').attr('href', src)
+        );
     });
-    $.noConflict();
+
+    $('a.fancybox').fancybox({
+        titlePosition: 'inside'
+    });
+});
 </script>
 </body>
 </html>

@@ -394,22 +394,29 @@ nav.shift ul li a:hover:after {
         </div>
     </footer>
 	<script type="text/javascript"> Cufon.now(); </script>
-<script type="text/javascript">
-  $('img.fancybox').each(function(){
-    var $this = $(this);
-    var src = $this.attr('data-big') || $this.attr('src');
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
+<script>
+$(function () {
+    $('img.fancybox').each(function () {
+        var $img = $(this);
 
-    var a = $('<a class="fancybox"></a>')
-        .attr('href', src);
+        if ($img.parent('a.fancybox').length) return;
 
-    $this.wrap(a);
+        var src = $img.attr('data-big') || $img.attr('src');
+        if (!src) return;
+
+        $img.wrap(
+            $('<a class="fancybox" rel="fancyboxgallery"></a>').attr('href', src)
+        );
+    });
+
+    $('a.fancybox').fancybox({
+        titlePosition: 'inside'
+    });
 });
-
-$('a.fancybox').attr('rel', 'fancyboxgallery');
-
-$('a.fancybox').fancybox();  
-    
-    </script>
+</script>
 </div>
 </body>
 </html>
